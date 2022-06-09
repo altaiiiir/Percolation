@@ -9,7 +9,6 @@ public class Percolation {
     private int [][] grid;
     private int size;
     private int openSites = 0;
-    private boolean percolates = false;
     private int top;
     private int bottom;
     private WeightedQuickUnionUF qu;
@@ -26,7 +25,7 @@ public class Percolation {
         qu = new WeightedQuickUnionUF((this.size*this.size)+3);
         load = new WeightedQuickUnionUF((this.size*this.size)+2);
 
-        bottom = (n*n) + + 2;
+        bottom = (n*n) + 2;
         top = (n*n) + 1;
 
         // create a new 1 indexed 2d array & its respective load 2d array
@@ -60,7 +59,7 @@ public class Percolation {
         }
 
         // if its bottom row then connect it to bottom pointer
-        if(row == this.size+1) {
+        if(row == this.size) {
             qu.union(bottom, currIndex);
         }
 
