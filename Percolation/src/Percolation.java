@@ -30,7 +30,6 @@ public class Percolation {
 
         // create a new 1 indexed 2d array & its respective load 2d array
         this.grid = new int[this.size+1][this.size+1];
-
     }
 
     private int flattenGrid(int row, int col) {
@@ -55,7 +54,7 @@ public class Percolation {
         // if its top row then connect to top pointer
         if(row == 1) {
             qu.union(top, currIndex);
-            load.union(top, currIndex);
+            //load.union(top, currIndex);
         }
 
         // if its bottom row then connect it to bottom pointer
@@ -66,22 +65,22 @@ public class Percolation {
         // top
         if(inbounds(row-1,col) && isOpen(row-1,col)) {
             this.qu.union(currIndex, flattenGrid(row-1,col));
-            this.load.union(currIndex, flattenGrid(row-1,col));
+            //this.load.union(currIndex, flattenGrid(row-1,col));
         }
         // down
         if(inbounds(row+1,col) && isOpen(row+1,col)) {
             this.qu.union(currIndex, flattenGrid(row+1,col));
-            this.load.union(currIndex, flattenGrid(row+1,col));
+            //this.load.union(currIndex, flattenGrid(row+1,col));
         }
         // left
         if(inbounds(row,col-1) && isOpen(row,col-1)) {
             this.qu.union(currIndex, flattenGrid(row,col-1));
-            this.load.union(currIndex, flattenGrid(row,col-1));
+            //this.load.union(currIndex, flattenGrid(row,col-1));
         }
         // right
         if(inbounds(row,col+1) && isOpen(row,col+1)) {
             this.qu.union(currIndex, flattenGrid(row,col+1));
-            this.load.union(currIndex, flattenGrid(row,col+1));
+            //this.load.union(currIndex, flattenGrid(row,col+1));
         }
     }
 
@@ -94,7 +93,7 @@ public class Percolation {
     // is the site (row, col) full?
     public boolean isFull(int row, int col){
         if(row<=0 || row>this.size || col<=0 || col>this.size) throw new IllegalArgumentException();
-        return this.load.find(flattenGrid(row, col)) == this.load.find(bottom);
+        return this.qu.find(flattenGrid(row, col)) == this.qu.find(top);
     }
 
     // returns the number of open sites
